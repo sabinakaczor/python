@@ -1,6 +1,6 @@
  # -*- coding: utf-8 -*-
 '''
-wttworniki (list comprehensions)
+wytworniki (list comprehensions)
 '''
 
 l=range(1,21,2)
@@ -48,7 +48,7 @@ print [`x` + y + `z` for x in [1,2]
 
 #postac rozszerzona z jednym warunkiem
 
-#para każdy element z każdym tyl;ko jeżeli pierwszy
+#para każdy element z każdym tylko jeżeli pierwszy
 # element jest mniejszy od drugiego
 print [(x,y) for x in range (1,5)
        for y in range (6,3,-1)
@@ -74,3 +74,48 @@ print [(x,y) for x in range (1,5)
 print [(x,y) for x in range (1,5) if not (x%2)
        for y in range (6,2,-1) if y%2]
 
+'''
+funkcje ułatwiające przetwarzanie sekwencji
+'''
+
+#funkcja apply  -  wywołannie funkcji z parametrami
+# uzyskanymi z rozpakowania sekwencji
+dziel = lambda x,y,z: (x+y)/z
+print dziel(7,4,6)
+
+xyz = (7,4,6)
+print apply(dziel,xyz)
+
+#funkcja map - wywołuje określoną funkcję dla każdego
+# elementu sekwencji z osobna
+print map(lambda x: x*x*x, range(10))
+print map(dziel, range(10), range(10), [2]*10)
+
+#funkcja zip - służy do konsolidacji danych
+#wartość pojedynczego elementu listy wynikowej
+# zależy od wartości pojedynczych
+# elementów list źródłowych
+
+print zip("abcdef",[1,2,3,4,5,6])
+print zip(range(1,10),range(9,0,-1))
+print zip("zip", range(0,9), zip(range(0,9)))
+
+#funkcja filter - służy do filtrowania danych
+
+#filtrowanie samogłosek
+samogloska = lambda x: x.lower() in 'aeiou'
+print samogloska('A')
+print filter(samogloska,"ala ma kota")
+
+#filtrowanie innych znaków2
+print filter(lambda x: not samogloska(x), "Ala ma kota")
+
+#funkcja reduce - agregowanie danych 9operacja obliczania
+# pojedynczego wyrażenia zależnego od wszystkich elementów
+# listy źródłowej
+
+#suma elementów
+print reduce(lambda x,y: x+y, [1,2,3])
+
+#suma kwadratów elementów
+print reduce(lambda x,y: x+y, map(lambda x: x*x, range(1,3)))
