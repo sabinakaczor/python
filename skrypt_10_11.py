@@ -110,7 +110,7 @@ print filter(samogloska,"ala ma kota")
 #filtrowanie innych znaków2
 print filter(lambda x: not samogloska(x), "Ala ma kota")
 
-#funkcja reduce - agregowanie danych 9operacja obliczania
+#funkcja reduce - agregowanie danych operacja obliczania
 # pojedynczego wyrażenia zależnego od wszystkich elementów
 # listy źródłowej
 
