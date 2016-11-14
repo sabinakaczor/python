@@ -6,7 +6,7 @@ def sito(n):
         A.append(True)
     
     
-    for i in range (2, floor(sqrt(n))+1):
+    for i in range (2, int(floor(sqrt(n))+1)):
         if (A[i] == True):
             j = i**2
             while (j<n):
