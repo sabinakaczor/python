@@ -1,13 +1,9 @@
 # coding: utf-8
-#utworzyć klasę - podpunkty mają być jej uniwersalnymi metodami
-# c - bez metody
 
 import random
 from math import sqrt, floor
 
 class Lista:
-    #def __init__(self):
-    #    self.A = A
 
     def initList(self):
         """tworzenie nowej listy"""
@@ -16,14 +12,13 @@ class Lista:
     def fillList(self):
         """uzupelnienie listy losowymi wartosciami"""
         size = input("Podaj rozmiar listy\n")
-        a = input("Podaj poczatek zakresu\n")
-        b = input("Podaj koniec zakresu\n")
-        while (b <= a):
-            b = input("Koniec zakresu musi byc wiekszy od poczatku!\n")
-
+        self.a = input("Podaj poczatek zakresu\n")
+        self.b = input("Podaj koniec zakresu\n")
+        while (self.b <= self.a):
+            self.b = input("Koniec zakresu musi byc wiekszy od poczatku!\n")
         random.seed()
         for i in range(size):
-            k = random.randint(a, b)
+            k = random.randint(self.a, self.b)
             self.lista.append(k)
 
     def printList(self):
@@ -36,6 +31,7 @@ class Lista:
         self.C = [x for x in self.lista if (x % 5) == 0]
 
     def duplicates(self):
+        """wyszukiwanie duplikatów i ich zapis do nowej listy"""
         self.D = []
         self.D += [self.A[i] for i in range(0,len(self.A)) for j in range (0,len(self.A)) if (self.A[i]==self.A[j] and i != j)]
         self.D += [self.B[i] for i in range(0,len(self.B)) for j in range (0,len(self.B)) if (self.B[i]==self.B[j] and i != j)]
@@ -47,6 +43,7 @@ class Lista:
         print self.D
 
     def duplicatesToX(self):
+        """zamiana duplikatów na X"""
         for i in range (0,len(self.D)):
             for j in range (0,len(self.lista)):
                 if self.lista[j]==self.D[i] and j != self.lista.index(self.D[i]):
@@ -66,17 +63,20 @@ class Lista:
         print self.C
 
     def removeDuplicates(self):
+        """usuwanie duplikatów z pierwotnej listy"""
         while ('X' in self.lista):
             self.lista.remove('X')
         print self.lista
 
     def average_n_cube(self):
+        "liczenie średniej i podnoszenie elementów do potęgi 3"
         self.average = (1.0 * sum(self.lista)) / len(self.lista)
         print self.average
         self.lista = [x**3 for x in self.lista]
         print self.lista
 
     def replace_multiplies(self):
+        """zastepowanie wielokrotności odpowiednimi literami"""
         self.multiplies()
         for i in range (0,len(self.lista)):
             if self.lista[i] in self.A:
@@ -97,11 +97,38 @@ class Lista:
         print self.lista
 
     def prime_numbers(self):
-        primes = sito(max(self.lista))
+        """zastępowanie liczb pierwszych znakiem Z"""
+        primes = sito(self.b)
         for i in range (0,len(self.lista)):
             if self.lista[i] in primes:
                 self.lista[i] = 'Z'
         print self.lista
+
+    def random_words(self):
+        """układanie słów z liter o losowych długościach z przedziała [3;25]"""
+        letters = []
+        words = []
+        for x in self.lista:
+            if type(x)==str:
+                if len(x)==1:
+                    letters.append(x)
+                else:
+                    letters += list(x)
+        word = ""
+        random.seed()
+        k = random.randint(3,25)
+        while (len(letters)>0):
+            i = random.randint(0,len(letters)-1)
+            if len(word) == k:
+                words.append(word)
+                word = ""
+                k = random.randint(3, 25)
+            word += letters[i]
+            del(letters[i])
+        if (len(letters) == 0):
+            words.append(word)
+        print words
+
 
 def sito(n):
     A = [True]
@@ -121,27 +148,7 @@ def sito(n):
             B.append(k)
     return B
 
-def nwd(l1, l2):
-    a = min(l1, l2)
-    b = max(l1, l2) % a
-    while a != 0 and b != 0:
-        temp = min(a, b)
-        temp2 = max(a, b) % temp
-        a = temp
-        b = temp2
-    if a == 0:
-        return b
-    else:
-        return a
 
-def nww(a, b):
-    return a * b / nwd(a, b)\
-
-
-
-
-
-#A=[]
 l = Lista()
 l.initList()
 l.fillList()
@@ -151,7 +158,6 @@ l.duplicates()
 l.duplicatesToX()
 l.removeDuplicates()
 #l.average_n_cube()
-#l.replace_multiplies()
+l.replace_multiplies()
 l.prime_numbers()
-#B = wielokrotnosci([1,2,10,6])
-#print B
+l.random_words()
