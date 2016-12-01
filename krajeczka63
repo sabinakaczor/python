@@ -1,0 +1,54 @@
+from Tkinter import *
+class LabelDemo (Frame):
+    'dalsza instrukcja etykiet i przyciski'
+    def __init__(self):
+        'Tworzy trzy etykiety i dwa przyciski oraz pakujeje '
+        # tworzy obiekt ramka w ktorym umieszczamy widgety
+        # ramka jest upakowana w glownym oknie i ma tytyl - Przyklad
+        Frame.__init__(self)
+        self.pack(expand = YES, fill = BOTH)
+        self.master.title("Przyklad")
+
+        # Tworzymy dwa przyciski o nazwach QUIT i Hej ktorych wcisniecie powoduje wywolanie metody quitl i say_hi odpowiednio
+        # Nazwy obiektow to button i hi_there
+        self.button = Button(self, text="QUIT", fg="red", command=self.quit1, width=16, height=1)
+        self.hi_there = Button(self, text="Hej", command=self.fib, width=16, height=1)
+        # tworzymy trzy pola etykiet - dwa tekstowe i ikone
+        self.Label1 = Label(self, text = "Etykieta tekstowa")
+        self.Label2 = Label(self, text = "Etykieta tekstowa z ikona")
+        self.Label3 = Label(self, bitmap = "warning")
+        # teraz pakujemy wszystko w ramce
+        self.button.pack(side=BOTTOM)
+        self.hi_there.pack(side=BOTTOM)
+        self.Label1.pack()
+        self.Label2.pack(side = LEFT)
+        self.Label3.pack(side = LEFT)
+
+    #metoda wywolywana przez wcisniecie przycisku Quit
+    def quit1(self):
+        print "Koniec"
+        quit()
+    #metoda wywolywana przez wcisniecie Hej
+    def say_hi(self):
+        print "Hej - witajcie !"
+
+    def fib(self):
+        k = [0, 1]
+        for l in range(2, 10):
+            il = k[l - 2] + k[l - 1]
+            k.append(il)
+        print k
+        self.Label4 = Label(self, text=k)
+        self.Label4.pack()
+
+
+# (A) Program glowny - utworzenie okna laveldemo i obsluga wszystkich zdzarzen
+def main():
+    LabelDemo().mainloop()
+# jesli nazwa uruchomionego programu to __main__ wywolaj procedure main()
+if  __name__ == "__main__":
+    main()
+
+# coding=utf-8
+
+
