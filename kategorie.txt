@@ -1,6 +1,6 @@
-kat1
-kat2
-kat3
-kat4
-kat5
-kat6
+Zwierzeta
+Owoce
+Rosliny
+Przedmioty
+Warzywa
+Zjawiska
